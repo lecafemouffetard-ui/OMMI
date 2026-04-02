@@ -1,27 +1,23 @@
 {
   "version": 2,
-  "name": "ommi",
   "builds": [
     {
-      "src": "ommi-backend.js",
-      "use": "@vercel/node"
+      "src": "index.html",
+      "use": "@vercel/static"
     },
     {
-      "src": "immovideo-app.html",
-      "use": "@vercel/static"
+      "src": "api/**/*.js",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/ommi-backend.js"
+      "dest": "/api/$1"
     },
     {
       "src": "/(.*)",
-      "dest": "/immovideo-app.html"
+      "dest": "/index.html"
     }
-  ],
-  "env": {
-    "NODE_ENV": "production"
-  }
+  ]
 }
