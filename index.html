@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OMMI - Studio IA Immobilier</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --white: #ffffff;
+            --bg: #fafafa;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --black: #000000;
+            --orange: #ff6b35;
+            --orange-dark: #e55a2b;
+            --blue: #2563eb;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--white);
+            color: var(--gray-900);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Header */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .header-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--black);
+            letter-spacing: -0.5px;
+        }
+
+        .nav {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--gray-600);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover {
+            color: var(--black);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .credits-badge {
+            padding: 8px 16px;
+            background: var(--gray-100);
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gray-700);
+        }
+
+        .btn-primary {
+            padding: 10px 24px;
+            background: var(--orange);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: var(--orange-dark);
+            transform: translateY(-1px);
+        }
+
+        /* Hero */
+        .hero {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 100px 40px 80px;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background: var(--gray-100);
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--gray-700);
+            margin-bottom: 24px;
+        }
+
+        .hero-badge .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--orange);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            font-weight: 800;
+            line-height: 1.1;
+            color: var(--black);
+            margin-bottom: 24px;
+            letter-spacing: -2px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: var(--gray-600);
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn-hero {
+            padding: 16px 32px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-hero.primary {
+            background: var(--orange);
+            color: white;
+            border: none;
+        }
+
+        .btn-hero.primary:hover {
+            background: var(--orange-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-hero.secondary {
+            background: white;
+            color: var(--gray-900);
+            border: 1px solid var(--gray-300);
+        }
+
+        .btn-hero.secondary:hover {
+            border-color: var(--gray-400);
+        }
+
+        /* Features Section */
+        .features-section {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 80px 40px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--orange);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--black);
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+        }
+
+        .section-description {
+            font-size: 18px;
+            color: var(--gray-600);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: white;
+            border: 1px solid var(--gray-200);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .feature-card:hover {
+            border-color: var(--gray-300);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            transform: translateY(-4px);
+        }
+
+        .feature-card.locked {
+            opacity: 0.6;
+            cursor: default;
+        }
+
+        .feature-card.locked:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .feature-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--gray-100);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .feature-badge {
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-active {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .badge-soon {
+            background: var(--gray-100);
+            color: var(--gray-600);
+        }
+
+        .feature-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 12px;
+        }
+
+        .feature-description {
+            font-size: 15px;
+            color: var(--gray-600);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .feature-preview {
+            width: 100%;
+            height: 200px;
+            background: var(--gray-50);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            font-size: 48px;
+        }
+
+        .feature-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .feature-credits {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gray-500);
+        }
+
+        .btn-feature {
+            padding: 10px 20px;
+            background: var(--black);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-feature:hover {
+            background: var(--gray-800);
+            transform: translateX(2px);
+        }
+
+        .btn-feature.locked {
+            background: var(--gray-200);
+            color: var(--gray-600);
+        }
+
+        .btn-feature.locked:hover {
+            transform: none;
+        }
+
+        /* Pricing */
+        .pricing-section {
+            background: var(--gray-50);
+            padding: 100px 40px;
+            margin-top: 80px;
+        }
+
+        .pricing-container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin-top: 60px;
+        }
+
+        .pricing-card {
+            background: white;
+            border: 2px solid var(--gray-200);
+            border-radius: 16px;
+            padding: 40px;
+            transition: all 0.3s;
+        }
+
+        .pricing-card:hover {
+            border-color: var(--gray-300);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+        }
+
+        .pricing-card.featured {
+            border-color: var(--orange);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card.featured::before {
+            content: 'POPULAIRE';
+            position: absolute;
+            top: 20px;
+            right: -35px;
+            background: var(--orange);
+            color: white;
+            padding: 4px 40px;
+            font-size: 11px;
+            font-weight: 700;
+            transform: rotate(45deg);
+        }
+
+        .pricing-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--gray-700);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .pricing-price {
+            font-size: 52px;
+            font-weight: 800;
+            color: var(--black);
+            margin-bottom: 8px;
+        }
+
+        .pricing-price span {
+            font-size: 20px;
+            color: var(--gray-500);
+        }
+
+        .pricing-period {
+            color: var(--gray-500);
+            font-size: 15px;
+            margin-bottom: 32px;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+
+        .pricing-features li {
+            padding: 12px 0;
+            color: var(--gray-700);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 15px;
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            color: var(--orange);
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .btn-pricing {
+            width: 100%;
+            padding: 16px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-pricing.primary {
+            background: var(--orange);
+            color: white;
+            border: none;
+        }
+
+        .btn-pricing.primary:hover {
+            background: var(--orange-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-pricing.secondary {
+            background: white;
+            color: var(--gray-900);
+            border: 2px solid var(--gray-300);
+        }
+
+        .btn-pricing.secondary:hover {
+            border-color: var(--gray-400);
+        }
+
+        .waitlist-info {
+            text-align: center;
+            margin-top: 16px;
+            font-size: 13px;
+            color: var(--gray-500);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 48px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-header {
+            margin-bottom: 32px;
+        }
+
+        .modal-close {
+            float: right;
+            font-size: 28px;
+            color: var(--gray-400);
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            color: var(--gray-600);
+        }
+
+        .modal h2 {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--black);
+            margin-bottom: 8px;
+        }
+
+        .modal p {
+            color: var(--gray-600);
+            font-size: 15px;
+        }
+
+        .modal input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid var(--gray-200);
+            border-radius: 10px;
+            font-size: 15px;
+            margin-bottom: 16px;
+            transition: border-color 0.2s;
+        }
+
+        .modal input:focus {
+            outline: none;
+            border-color: var(--orange);
+        }
+
+        .modal button {
+            width: 100%;
+            padding: 16px;
+            background: var(--orange);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .modal button:hover {
+            background: var(--orange-dark);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--gray-900);
+            color: white;
+            padding: 60px 40px 40px;
+            margin-top: 100px;
+        }
+
+        .footer-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .footer-text {
+            color: var(--gray-400);
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav {
+                display: none;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+            }
+
+            .btn-hero {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">OMMI</div>
+            <nav class="nav">
+                <a href="#features" class="nav-link">Fonctionnalités</a>
+                <a href="#pricing" class="nav-link">Tarifs</a>
+            </nav>
+            <div class="header-actions">
+                <div class="credits-badge">⚡ <span id="creditsCount">50</span> crédits</div>
+                <button class="btn-primary" onclick="scrollTo('#pricing')">Upgrade</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-badge">
+            <span class="dot"></span>
+            Beta ouverte
+        </div>
+        <h1>L'IA qui révolutionne<br>l'immobilier en France</h1>
+        <p>Transformez vos photos en vidéos cinématiques, meublez vos pièces vides, créez des visites vocales. 10 outils professionnels alimentés par l'IA.</p>
+        <div class="hero-cta">
+            <button class="btn-hero primary" onclick="scrollTo('#features')">Découvrir les outils</button>
+            <button class="btn-hero secondary" onclick="window.open('https://calendly.com', '_blank')">Réserver une démo</button>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+        <div class="section-header">
+            <div class="section-label">Fonctionnalités</div>
+            <h2 class="section-title">Tout ce dont vous avez besoin</h2>
+            <p class="section-description">Une suite complète d'outils IA pour transformer vos annonces immobilières</p>
+        </div>
+
+        <div class="features-grid">
+            <!-- Feature 1 -->
+            <div class="feature-card" onclick="openFeature('furnish-ai')">
+                <div class="feature-header">
+                    <div class="feature-icon">🏠</div>
+                    <div class="feature-badge badge-active">Beta</div>
+                </div>
+                <h3 class="feature-title">Furnish AI</h3>
+                <p class="feature-description">Meublez vos pièces vides en 10 secondes. 6 styles de décoration professionnels.</p>
+                <div class="feature-preview">🛋️</div>
+                <div class="feature-footer">
+                    <span class="feature-credits">3 crédits</span>
+                    <button class="btn-feature">Essayer →</button>
+                </div>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="feature-card" onclick="openFeature('ultra-sharp')">
+                <div class="feature-header">
+                    <div class="feature-icon">✨</div>
+                    <div class="feature-badge badge-active">Beta</div>
+                </div>
+                <h3 class="feature-title">Ultra Sharp</h3>
+                <p class="feature-description">Rendu HDR professionnel. Photos ultra-détaillées et éclatantes en 1 clic.</p>
+                <div class="feature-preview">📸</div>
+                <div class="feature-footer">
+                    <span class="feature-credits">2 crédits</span>
+                    <button class="btn-feature">Essayer →</button>
+                </div>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="feature-card" onclick="openFeature('area-intel')">
+                <div class="feature-header">
+                    <div class="feature-icon">📍</div>
+                    <div class="feature-badge badge-active">Beta</div>
+                </div>
+                <h3 class="feature-title">Area Intel</h3>
+                <p class="feature-description">Carte interactive du quartier. Écoles, commerces, transports en un coup d'œil.</p>
+                <div class="feature-preview">🗺️</div>
+                <div class="feature-footer">
+                    <span class="feature-credits">1 crédit</span>
+                    <button class="btn-feature">Essayer →</button>
+                </div>
+            </div>
+
+            <!-- Feature 4 -->
+            <div class="feature-card" onclick="openFeature('transit-time')">
+                <div class="feature-header">
+                    <div class="feature-icon">🚇</div>
+                    <div class="feature-badge badge-active">Beta</div>
+                </div>
+                <h3 class="feature-title">Transit Time</h3>
+                <p class="feature-description">Calcul automatique des temps de trajet vers les points clés de la ville.</p>
+                <div class="feature-preview">⏱️</div>
+                <div class="feature-footer">
+                    <span class="feature-credits">1 crédit</span>
+                    <button class="btn-feature">Essayer →</button>
+                </div>
+            </div>
+
+            <!-- Feature 5 - LOCKED -->
+            <div class="feature-card locked" onclick="showWaitlist('Motion Blend')">
+                <div class="feature-header">
+                    <div class="feature-icon">🎬</div>
+                    <div class="feature-badge badge-soon">Bientôt</div>
+                </div>
+                <h3 class="feature-title">Motion Blend</h3>
+                <p class="feature-description">2 photos → Vidéo cinématique avec rotation fluide. Transition slow-motion.</p>
+                <div class="feature-preview">🎥</div>
+                <div class="feature-footer">
+                    <span class="feature-credits">5 crédits</span>
+                    <button class="btn-feature locked">Waitlist →</button>
+                </div>
+            </div>
+
+            <!-- Feature 6 - LOCKED -->
+            <div class="feature-card locked" onclick="showWaitlist('Shadow Play')">
+                <div class="feature-header">
+                    <div class="feature-icon">☀️</div>
+                    <div class="feature-badge badge-soon">Bientôt</div>
+                </div>
+                <h3 class="feature-title">Shadow Play</h3>
+                <p class="feature-description">Animation des ombres. Le soleil traverse votre bien en time-lapse accéléré.</p>
+                <div class="feature-preview">🌤️</div>
+                <div class="feature-footer">
+                    <span class="feature-credits">8 crédits</span>
+                    <button class="btn-feature locked">Waitlist →</button>
+                </div>
+            </div>
+
+            <!-- Feature 7 - LOCKED -->
+            <div class="feature-card locked" onclick="showWaitlist('Voice Tour')">
+                <div class="feature-header">
+                    <div class="feature-icon">🎙️</div>
+                    <div class="feature-badge badge-soon">Bientôt</div>
+                </div>
+                <h3 class="feature-title">Voice Tour</h3>
+                <p class="feature-description">Visite guidée vocale générée par IA. Voix professionnelle française naturelle.</p>
+                <div class="feature-preview">🔊</div>
+                <div class="feature-footer">
+                    <span class="feature-credits">4 crédits</span>
+                    <button class="btn-feature locked">Waitlist →</button>
+                </div>
+            </div>
+
+            <!-- Feature 8 - LOCKED -->
+            <div class="feature-card locked" onclick="showWaitlist('Reel Maker')">
+                <div class="feature-header">
+                    <div class="feature-icon">🎞️</div>
+                    <div class="feature-badge badge-soon">Bientôt</div>
+                </div>
+                <h3 class="feature-title">Reel Maker</h3>
+                <p class="feature-description">Trailer cinématique automatique. 5-10 photos → Mini-film style Netflix de 15s.</p>
+                <div class="feature-preview">🎬</div>
+                <div class="feature-footer">
+                    <span class="feature-credits">10 crédits</span>
+                    <button class="btn-feature locked">Waitlist →</button>
+                </div>
+            </div>
+
+            <!-- Feature 9 - LOCKED -->
+            <div class="feature-card locked" onclick="showWaitlist('Renov Vision')">
+                <div class="feature-header">
+                    <div class="feature-icon">🏗️</div>
+                    <div class="feature-badge badge-soon">Bientôt</div>
+                </div>
+                <h3 class="feature-title">Renov Vision</h3>
+                <p class="feature-description">Before/After rénovation IA. Visualisez le potentiel d'un bien à rénover.</p>
+                <div class="feature-preview">🔨</div>
+                <div class="feature-footer">
+                    <span class="feature-credits">5 crédits</span>
+                    <button class="btn-feature locked">Waitlist →</button>
+                </div>
+            </div>
+
+            <!-- Feature 10 - LOCKED -->
+            <div class="feature-card locked" onclick="showWaitlist('Day & Night')">
+                <div class="feature-header">
+                    <div class="feature-icon">🌙</div>
+                    <div class="feature-badge badge-soon">Bientôt</div>
+                </div>
+                <h3 class="feature-title">Day & Night</h3>
+                <p class="feature-description">Transformation jour/nuit. Découvrez votre bien sous les étoiles avec éclairages.</p>
+                <div class="feature-preview">🌃</div>
+                <div class="feature-footer">
+                    <span class="feature-credits">3 crédits</span>
+                    <button class="btn-feature locked">Waitlist →</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section" id="pricing">
+        <div class="pricing-container">
+            <div class="section-header">
+                <div class="section-label">Tarifs</div>
+                <h2 class="section-title">Choisissez votre plan</h2>
+                <p class="section-description">Des tarifs adaptés à tous les professionnels de l'immobilier</p>
+            </div>
+
+            <div class="pricing-grid">
+                <!-- Free -->
+                <div class="pricing-card">
+                    <div class="pricing-name">Beta Gratuit</div>
+                    <div class="pricing-price">0€</div>
+                    <div class="pricing-period">Pour toujours</div>
+                    <ul class="pricing-features">
+                        <li>50 crédits offerts</li>
+                        <li>4 features actives</li>
+                        <li>Export 1080p</li>
+                        <li>Accès beta prioritaire</li>
+                    </ul>
+                    <button class="btn-pricing secondary">Plan actuel</button>
+                </div>
+
+                <!-- Pro -->
+                <div class="pricing-card featured">
+                    <div class="pricing-name">Pro</div>
+                    <div class="pricing-price">39€<span>/mois</span></div>
+                    <div class="pricing-period">Idéal pour agents indépendants</div>
+                    <ul class="pricing-features">
+                        <li>500 crédits/mois</li>
+                        <li>10 features complètes</li>
+                        <li>Export 4K</li>
+                        <li>Sans watermark</li>
+                        <li>Support prioritaire</li>
+                        <li>API access</li>
+                    </ul>
+                    <button class="btn-pricing primary" onclick="showWaitlist('Plan Pro')">Rejoindre la waitlist</button>
+                    <div class="waitlist-info">372 personnes devant vous</div>
+                </div>
+
+                <!-- Agency -->
+                <div class="pricing-card">
+                    <div class="pricing-name">Agency</div>
+                    <div class="pricing-price">149€<span>/mois</span></div>
+                    <div class="pricing-period">Pour les agences et réseaux</div>
+                    <ul class="pricing-features">
+                        <li>Crédits illimités</li>
+                        <li>Toutes les features</li>
+                        <li>White-label</li>
+                        <li>Export 4K</li>
+                        <li>Account manager dédié</li>
+                        <li>Formation équipe</li>
+                        <li>API illimitée</li>
+                    </ul>
+                    <button class="btn-pricing secondary" onclick="alert('Contactez-nous: contact@ommi.fr')">Nous contacter</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">OMMI</div>
+            <p class="footer-text">© 2026 OMMI. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <!-- Waitlist Modal -->
+    <div class="modal" id="waitlistModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal-close" onclick="closeWaitlist()">×</span>
+                <h2>Rejoindre la waitlist</h2>
+                <p>Soyez parmi les premiers à accéder à <strong id="featureName"></strong></p>
+            </div>
+            <form onsubmit="submitWaitlist(event)">
+                <input type="text" placeholder="Nom complet" required id="waitlistName">
+                <input type="email" placeholder="Email professionnel" required id="waitlistEmail">
+                <input type="text" placeholder="Entreprise (optionnel)" id="waitlistCompany">
+                <button type="submit">Rejoindre la waitlist</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const state = {
+            credits: 50,
+            waitlist: []
+        };
+
+        function openFeature(name) {
+            alert(`Feature "${name}" va s'ouvrir ici dans la prochaine mise à jour !`);
+        }
+
+        function showWaitlist(feature) {
+            document.getElementById('featureName').textContent = feature;
+            document.getElementById('waitlistModal').classList.add('active');
+        }
+
+        function closeWaitlist() {
+            document.getElementById('waitlistModal').classList.remove('active');
+        }
+
+        function submitWaitlist(e) {
+            e.preventDefault();
+            const name = document.getElementById('waitlistName').value;
+            const email = document.getElementById('waitlistEmail').value;
+            const company = document.getElementById('waitlistCompany').value;
+            const feature = document.getElementById('featureName').textContent;
+
+            state.waitlist.push({ name, email, company, feature, date: new Date() });
+
+            alert(`✓ Merci ${name} !\n\nVous êtes inscrit sur la waitlist pour "${feature}".\n\nVous recevrez un email dès que c'est disponible.`);
+            
+            closeWaitlist();
+            document.getElementById('waitlistName').value = '';
+            document.getElementById('waitlistEmail').value = '';
+            document.getElementById('waitlistCompany').value = '';
+
+            console.log('Waitlist:', state.waitlist);
+        }
+
+        function scrollTo(selector) {
+            document.querySelector(selector).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        window.onclick = function(e) {
+            const modal = document.getElementById('waitlistModal');
+            if (e.target === modal) closeWaitlist();
+        }
+    </script>
+</body>
+</html>
