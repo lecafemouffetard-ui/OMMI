@@ -621,6 +621,105 @@
             font-size: 14px;
         }
 
+        .footer-links {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--gray-400);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        /* Cookie Banner */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid var(--gray-200);
+            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: none;
+        }
+
+        .cookie-banner.active {
+            display: block;
+        }
+
+        .cookie-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 30px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .cookie-text {
+            flex: 1;
+        }
+
+        .cookie-text strong {
+            display: block;
+            font-size: 16px;
+            color: var(--black);
+            margin-bottom: 8px;
+        }
+
+        .cookie-text p {
+            font-size: 14px;
+            color: var(--gray-600);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .cookie-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-cookie {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .btn-cookie.primary {
+            background: var(--orange);
+            color: white;
+            border: none;
+        }
+
+        .btn-cookie.primary:hover {
+            background: var(--orange-dark);
+        }
+
+        .btn-cookie.secondary {
+            background: white;
+            color: var(--gray-700);
+            border: 1px solid var(--gray-300);
+        }
+
+        .btn-cookie.secondary:hover {
+            border-color: var(--gray-400);
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .hero h1 {
@@ -901,9 +1000,30 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-logo">OMMI</div>
-            <p class="footer-text">© 2026 OMMI. Tous droits réservés.</p>
+            <p class="footer-text">Studio IA pour professionnels de l'immobilier</p>
+            <div class="footer-links">
+                <a href="mentions-legales.html">Mentions légales</a>
+                <a href="confidentialite.html">Politique de confidentialité</a>
+                <a href="cgu.html">CGU/CGV</a>
+                <a href="mailto:contact@ommi.fr">Contact</a>
+            </div>
+            <p class="footer-text" style="margin-top: 20px; font-size: 13px;">© 2026 OMMI. Tous droits réservés.</p>
         </div>
     </footer>
+
+    <!-- Cookie Banner -->
+    <div class="cookie-banner" id="cookieBanner">
+        <div class="cookie-content">
+            <div class="cookie-text">
+                <strong>🍪 Cookies et confidentialité</strong>
+                <p>Nous utilisons des cookies pour améliorer votre expérience. En continuant, vous acceptez notre utilisation des cookies conformément à notre politique de confidentialité.</p>
+            </div>
+            <div class="cookie-actions">
+                <button class="btn-cookie secondary" onclick="manageCookies()">Gérer les cookies</button>
+                <button class="btn-cookie primary" onclick="acceptCookies()">Tout accepter</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Waitlist Modal -->
     <div class="modal" id="waitlistModal">
@@ -968,6 +1088,30 @@
             const modal = document.getElementById('waitlistModal');
             if (e.target === modal) closeWaitlist();
         }
+
+        // Cookie Management
+        function checkCookieConsent() {
+            const consent = localStorage.getItem('cookieConsent');
+            if (!consent) {
+                setTimeout(() => {
+                    document.getElementById('cookieBanner').classList.add('active');
+                }, 1000);
+            }
+        }
+
+        function acceptCookies() {
+            localStorage.setItem('cookieConsent', 'accepted');
+            document.getElementById('cookieBanner').classList.remove('active');
+        }
+
+        function manageCookies() {
+            alert('Paramètres des cookies\n\n✓ Cookies essentiels (obligatoires)\n✓ Cookies analytiques (désactivés par défaut)\n✓ Cookies marketing (désactivés par défaut)\n\nPour modifier vos préférences, contactez-nous à privacy@ommi.fr');
+            localStorage.setItem('cookieConsent', 'managed');
+            document.getElementById('cookieBanner').classList.remove('active');
+        }
+
+        // Check cookie consent on page load
+        checkCookieConsent();
     </script>
 </body>
 </html>
